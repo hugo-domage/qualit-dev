@@ -63,14 +63,14 @@ public class Jeu{
             System.out.println("Tu es face a face avec le Boss");
             System.out.println("Dragon");
             Scanner sc = new Scanner(System.in);
-            while (!Boss.Boss_est_mort && Personnages.est_En_Vie()) {
+            while (Boss.est_En_Vie() || Personnages.est_En_Vie()) {
 
                 System.out.println("Quelle est le nom du sort que tu souhaite utiliser ? ");
                 String nom_sort = sc.nextLine();
                 System.out.println("Le nom du sort que tu souhaite utiliser : " + nom_sort);
                 if (Objects.equals(nom_sort, "attaque de base")) {
                     Personnages.attaquer1();
-                }if (Objects.equals(nom_sort, "attaque Spéciale")) {
+                }else if (Objects.equals(nom_sort, "attaque Spéciale")) {
                     Guerrier.attaque_Spéciale_Guerrier();
                 }
                 else {
@@ -93,11 +93,14 @@ public class Jeu{
 
                 }
             }
-            if (Boss.Boss_est_mort){
+            if (!Boss.est_En_Vie()){
                 System.out.println("~ Le Boss est mort, Le joueur gagne ~");
+                Personnages.gagner_Xp();
+                Personnages.Systeme_de_nv();
             }
             if (!Personnages.est_En_Vie()){
                 System.out.println("~ Le Joueur est mort, Le joueur perd ~");
+
             }
 
         }

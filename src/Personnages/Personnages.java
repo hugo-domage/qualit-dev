@@ -3,7 +3,6 @@ package Personnages;
 
 import Donjons.Boss;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import static Donjons.Boss.*;
@@ -14,7 +13,7 @@ public abstract class Personnages {
 
     String nom;
     String sexe;
-    int poids;
+    static int poids;
     int taille;
     int age;
     static int degats;
@@ -28,10 +27,10 @@ public abstract class Personnages {
     int po;
     int niveau;
     int honneur;
-    int nv =1;
+    static int nv =1;
     static int Xp = 0;
 
-    private static final double MULTIPL=1.25;
+    private static final double MULTIPL=300;
 
     public static int getDegat() {
         return degat;
@@ -63,12 +62,11 @@ public abstract class Personnages {
     }
 
     static HashMap<Integer, String> inventaire = new HashMap<>(); // numero du sac 1,2,3,4; nom de l'objet
-    ArrayList<String> mascote = new ArrayList<>();
-    static String sort ; //  nom du sort
-    static HashMap<String, String> armure = new HashMap<>(); // nom de l'armure, cuir
-    static HashMap<Integer, String> arme = new HashMap<>(); // nom de l'arme, a une main
 
-    public Personnages(String nom, String sexe, int poids, int taille, int age, int force, int degats, int nv, int po, int degat, String sort) {
+    static String sort ; //  nom du sort
+
+
+    public Personnages(String nom, String sexe, int poids, int taille, int age, int force, int nv, int po, int degat, int i, String sort, HashMap<Integer, String> inventaire ) {
         this.nom = nom;
         this.sexe = sexe;
         this.poids = poids;
@@ -77,7 +75,6 @@ public abstract class Personnages {
         this.nv = nv;
         this.po = po;
         this.sort = sort;
-        this.niveau = niveau;
         this.honneur = honneur;
         this.inventaire = inventaire;
         this.santé = santé;
@@ -85,6 +82,8 @@ public abstract class Personnages {
         this.Xp = Xp;
 
     }
+
+
 
     public String getNom() {
         return nom;
@@ -134,21 +133,8 @@ public abstract class Personnages {
         this.age = age;
     }
 
-    public int getDegats() {
-        return degats;
-    }
 
-    public void setDegats(int degats) {
-        this.degats = degats;
-    }
 
-    public int getPlayerNumber() {
-        return playerNumber;
-    }
-
-    public void setPlayerNumber(int playerNumber) {
-        this.playerNumber = playerNumber;
-    }
 
     public int getFaim() {
         return faim;
@@ -182,13 +168,7 @@ public abstract class Personnages {
         this.niveau = niveau;
     }
 
-    public int getHonneur() {
-        return honneur;
-    }
 
-    public void setHonneur(int honneur) {
-        this.honneur = honneur;
-    }
 
     public HashMap<Integer, String> getInventaire() {
         return inventaire;
@@ -198,13 +178,7 @@ public abstract class Personnages {
         Personnages.inventaire = inventaire;
     }
 
-    public ArrayList<String> getMascote() {
-        return mascote;
-    }
 
-    public void setMascote(ArrayList<String> mascote) {
-        this.mascote = mascote;
-    }
 
 
     public static String getSort() {
@@ -215,29 +189,17 @@ public abstract class Personnages {
         this.sort = sort;
     }
 
-    public static HashMap<String, String> getArmure() {
-        return armure;
-    }
 
-    public static void setArmure(HashMap<String, String> armure) {
-        Personnages.armure = armure;
-    }
-
-    public static HashMap<Integer, String> getArme() {
-        return arme;
-    }
-
-    public static void setArme(HashMap<Integer, String> arme) {
-        Personnages.arme = arme;
-    }
 
 
     public static void perdre_vie_Joeur() {
+
         System.out.println("joueur perd " + degat_Boss + " points de vie");
         santé=(santé - degat_Boss);
-        System.out.println("Joeur " + santé + " points de vie");
-        if (getSanté() == 0) {
-
+        if (santé > 0) {
+            System.out.println("Joueur " + santé + " points de vie");
+        }
+        if (santé == 0) {
             System.out.println("Joueur " + santé + " points de vie");
         }
     }
@@ -275,30 +237,47 @@ public abstract class Personnages {
 
 
 
-    public static boolean Boss_est_mort(){
-        return !est_En_Vie();
-    }
+
 
     public static void gagner_Xp(){
-        if (Boss_est_mort()) {
+        if (!Boss.est_En_Vie()) {
             Personnages.Xp += Boss.Xp;
+            System.out.println("tu gagnes "+ Xp + "Xp");
         }
     }
-    public  void Systeme_de_nv(){
-        for (nv = 1; nv<80 ; ++nv) {
-            if (Xp > 1000) {
-
+    public static void Systeme_de_nv(){
+        if (nv==1) {
+            while (Xp <= 1000) {
+                nv = 1;
             }
+            nv = 2;
+            Xp = 0; //retour a 0 d'xp car le peronnage passe un nv
+            System.out.println("tu viens de passer un nv, tu es maintenant au niveau 2");
         }
+        if (nv==2) {
+            while (Xp <= 2000) {
+                nv = 2;
+            }
+            nv = 3;
+            Xp = 0;
+            System.out.println("tu viens de passer un nv, tu es maintenant au niveau 3");
+
+        }
+        if (nv==3) {
+            while (Xp <= 3000) {
+                nv = 3;
+            }
+            nv = 4;
+            Xp = 0;
+            System.out.println("tu viens de passer un nv, tu es maintenant au niveau 4");
+
+        }
+        }
+
+    public static boolean est_En_Vie() {
+        return santé > 0;
     }
-    public static boolean est_En_Vie(){
-        if (santé > 0){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
+
     public static void attaquer1(){ // attque de base joueur
         System.out.println("joueur attaque avec son attaque de base, il fait " + degat +" degat ");
         perdre_vie_Boss();

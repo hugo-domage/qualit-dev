@@ -16,9 +16,7 @@ public abstract class enemy {
         this.XP = XP;
     }
 
-    public enemy() {
 
-    }
 
     public String getNom() {
         return nom;
@@ -36,12 +34,8 @@ public abstract class enemy {
         this.XP = XP;
     }
 
-    public boolean est_En_Vie() {
-        if (santé > 0) {
-            return true;
-        } else {
-            return false;
-        }
+    public static boolean est_En_Vie() {
+        return santé > 0;
     }
 
     }

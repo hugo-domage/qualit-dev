@@ -24,24 +24,17 @@ public class Guerrier extends Personnages implements Armure_en_maille {
                 santé,
                 po,
                 degat,
-                sort
+                sort,
+                inventaire
         );
 
         this.inventaire = inventaire;
-        arme.put(12, "épée du revenant");
+
 
     }
 
 
-    @Override
-    public int getDegats() {
-        return degats;
-    }
 
-    @Override
-    public void setDegats(int degats) {
-        Guerrier.degats = degats;
-    }
 
     public static double getMULTIPL() {
         return MULTIPL;

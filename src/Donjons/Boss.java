@@ -4,8 +4,6 @@ import static Personnages.Personnages.*;
 
 public class Boss extends enemy {
 
-
-    public static boolean Boss_est_mort;
     public static int degat_Boss = 25;
     public static int Xp = 10000;
 
@@ -15,14 +13,16 @@ public class Boss extends enemy {
     }
     public static void attaquer1_Boss(){ // attaque classique du Boss
         System.out.println("Le Boss attaque avec son attaque de base, il fait " + degat_Boss +" degat ");
-        perdre_vie_Joeur();
+        perdre_vie_Boss();
     }
 
     public static void perdre_vie_Boss() {
-        System.out.println("Boss perd " + degat + " points de vie");
-        santé =(santé - degat);
-        System.out.println("Boss " + santé + " points de vie");
-        if (getSanté() == 0) {
+        if (santé > 0) {
+            System.out.println("Boss perd " + degat + " points de vie");
+            santé = (santé - degat);
+            System.out.println("Boss " + santé + " points de vie");
+        }
+        else  {
             System.out.println("Le Boss est mort");
         }
     }
