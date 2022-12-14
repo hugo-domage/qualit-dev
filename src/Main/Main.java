@@ -32,7 +32,7 @@ public class Main {
         guerrier.attaquer();
         System.out.println(guerrier.getSort());
         */
-        //Guerrier guerrier = new Guerrier("Masculin", 60, 203, 28, 3, 10, 1,450, 25, 4, sort, Map.ofEntries(Map.entry(2, "coucou")));
+
 
        // Jeu.Creation_personange();
       //  Jeu.Choix_Du_Donjons();

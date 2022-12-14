@@ -18,7 +18,7 @@ public class Jeu{
 
     }
 
-    public static void Creation_personange() {
+    public static void Creation_personange() { //Création du personnage
         System.out.println("Veuillez créer votre personnage");
         System.out.println("Quel est la classe que vous choisissez?");
         Scanner scanner = new Scanner(System.in);
@@ -68,14 +68,12 @@ public class Jeu{
                 System.out.println("Quelle est le nom du sort que tu souhaite utiliser ? ");
                 String nom_sort = sc.nextLine();
                 System.out.println("Le nom du sort que tu souhaite utiliser : " + nom_sort);
-                if (Objects.equals(nom_sort, "attaque1")) {
+                if (Objects.equals(nom_sort, "attaque de base")) {
                     Personnages.attaquer1();
-                } else {
-                    System.out.println("tu as raté ton attaque");
-                }
-                if (Objects.equals(nom_sort, "attaque Spéciale")) {
+                }if (Objects.equals(nom_sort, "attaque Spéciale")) {
                     Guerrier.attaque_Spéciale_Guerrier();
-                } else {
+                }
+                else {
                     System.out.println("tu as raté ton attaque");
                 }
 

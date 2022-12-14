@@ -7,9 +7,10 @@ public class Boss extends enemy {
 
     public static boolean Boss_est_mort;
     public static int degat_Boss = 25;
+    public static int Xp = 10000;
 
     static int santé = 300;
-    public Boss(String nom, int santé, int XP) {
+    public Boss(String nom, int santé,  int XP) {
         super("Dragon", 300, 10000);
     }
     public static void attaquer1_Boss(){ // attaque classique du Boss
@@ -25,4 +26,5 @@ public class Boss extends enemy {
             System.out.println("Le Boss est mort");
         }
     }
+
 }
