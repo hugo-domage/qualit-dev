@@ -3,6 +3,7 @@ package Game;
 import Donjons.Boss;
 import Personnages.Personnages;
 import Personnages.*;
+import thread.TimeoutThread;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -13,16 +14,35 @@ import java.util.Scanner;
 public class Jeu {
 
 
-    public Jeu(String nom, String sexe, int poids, int taille, int age, int force, int degats, int playerNumber, int po, int niveau) {
-
-    }
+    private static int classe;
 
     public static void Creation_personange() { //Création du personnage
         System.out.println("Veuillez créer votre personnage");
         System.out.println("Quel est la classe que vous choisissez?");
         Scanner scanner = new Scanner(System.in);
-        String classe = scanner.nextLine();
-        System.out.println("La classe de ton personnage : " + classe);
+        System.out.println("1. Guerrier");
+        System.out.println("2. Archer");
+        System.out.println("3. Mage");
+        classe = scanner.nextInt();
+        String classeChoisit = "";
+        switch (classe) {
+            case 1:
+                classeChoisit = "Guerrier";
+                break;
+            case 2:
+                classeChoisit = "Archer";
+                break;
+            case 3:
+                classeChoisit = "Mage";
+                break;
+            default:
+                classeChoisit= "Guerrier";
+                break;
+        }
+
+
+
+        System.out.println("La classe de ton personnage : " + classeChoisit);
 
         System.out.println("Quel est votre nom ?");
         Scanner sc = new Scanner(System.in);
@@ -43,86 +63,164 @@ public class Jeu {
         Scanner sc3 = new Scanner(System.in);
         int taille = sc3.nextInt();
         System.out.println("La taille de ton personnage : " + taille + "cm");
-        if (Objects.equals(classe, "guerrier")) {
-            int force = 25;
-        }
+
     }
 
     public static void Choix_Du_Donjons() {
-        System.out.println("--- Vous entrez dans la selection du Donjons ---");
         Scanner sc = new Scanner(System.in);
-        String Donjons = sc.nextLine();
-        if (Objects.equals(Donjons, "Dragon")) {
-            System.out.println("le donjons choisit : " + Donjons);
+        System.out.println("Quel donjon veux-tu visiter?");
+        System.out.println("1. Tanière du dragon");
+        System.out.println("2. Marécage");
+        System.out.println("3. La grotte");
+        int choixDonjon = sc.nextInt();
+        String nomDonjon = "";
+        String nomBoss = "";
+        switch (choixDonjon) {
+            case 1:
+                nomDonjon = "Tanière du dragon";
+                nomBoss = "Dragon";
+                break;
+            case 2:
+                nomDonjon = "Marécage";
+                nomBoss = "Monstre marin";
+                break;
+            case 3:
+                nomDonjon = "La grotte";
+                nomBoss = "Yéti";
+                break;
         }
+        System.out.println("--- Tu rentres dans le donjon " + nomDonjon + " ---");
+        System.out.println("Tu es face a face avec le Boss");
+        System.out.println(nomBoss);
     }
 
 
     // combat
     public static void Combat() {
-        System.out.println("--- Tu rentres dans le donjons la taniére des Dragon ---");
-        System.out.println("Tu es face a face avec le Boss");
-        System.out.println("Dragon");
+
         Scanner sc = new Scanner(System.in);
-
-        System.out.println("Choisissez votre classe : Guerrier, Archer ou Mage");
-        String classe = sc.nextLine();
-
         while (Boss.est_En_Vie() || Personnages.est_En_Vie()) {
 
             System.out.println("Quelle est le nom du sort que tu souhaite utiliser ? ");
-            String nom_sort = sc.nextLine();
-            System.out.println("Le nom du sort que tu souhaite utiliser : " + nom_sort);
+            if (classe == 1)// Guerrier
+                 {
+                     System.out.println("1. attaque de base");
+                     System.out.println("2. attaque spéciale");
+                     System.out.println("3. esquive");
+                     int CHoixDesAttaques = sc.nextInt();
+                     String attaqueChoisit = "";
 
-            if (classe.equals("Guerrier")) {
-                if (Objects.equals(nom_sort, "attaque de base")) {
-                    Personnages.attaquer1();
-                } else if (Objects.equals(nom_sort, "attaque Spéciale")) {
-                    Guerrier.attaque_Spéciale_Guerrier();
-                } else {
-                    System.out.println("tu as raté ton attaque");
-                }
-            } else if (classe.equals("Archer")) {
-                if (Objects.equals(nom_sort, "attaque de base")) {
-                    Archer.attaquer1_Archer();
-                } else if (Objects.equals(nom_sort, "attaque Spéciale")) {
-                    Archer.attaque_Spéciale_Archer();
-                } else {
-                    System.out.println("tu as raté ton attaque");
-                }
-            } else if (classe.equals("Mage")) {
-                if (Objects.equals(nom_sort, "attaque de base")) {
-                    Mage.attaquer1_Mage();
-                } else if (Objects.equals(nom_sort, "attaque Spéciale")) {
-                    Mage.attaque_Spéciale_Mage();
-                } else {
-                    System.out.println("tu as raté ton attaque");
-                }
+                     switch (CHoixDesAttaques) {
+                         case 1:
+                             Guerrier.attaquer1();
+                             break;
+                         case 2:Guerrier.attaque_Spéciale_Guerrier();
+                             break;
+                         case 3:
+                             Personnages.esquive();
+                             break;
+                     }
+
             }
-            
+            if (classe == 2)// Archer
+            {
+                System.out.println("1. attaque de base");
+                System.out.println("2. attaque spéciale");
+                System.out.println("3. esquive");
+                int CHoixDesAttaques = sc.nextInt();
+                String attaqueChoisit = "";
+                switch (CHoixDesAttaques) {
+                    case 1:
+                        Archer.attaquer1();
+                        break;
+                    case 2:
+                        Archer.attaque_Spéciale_Archer();
+                        break;
+                    case 3:
+                        Personnages.esquive();
+
+
+                        break;
+                }
+
+            }
+            if (classe == 3)// Mage
+            {
+                System.out.println("1. attaque de base");
+                System.out.println("2. attaque spéciale");
+                System.out.println("3. esquive");
+                int CHoixDesAttaques = sc.nextInt();
+                String attaqueChoisit = "";
+                String nomAttaque ="";
+                switch (CHoixDesAttaques) {
+                    case 1:
+                        Mage.attaquer1();
+                        break;
+                    case 2:
+                        Mage.attaque_Spéciale_Mage();
+                        break;
+                    case 3:
+                        Personnages.esquive();
+                        break;
+                }
+
+            }
+
+        }
+
+
+
+
+        int random1 = (int) (Math.random() * 2);
+        if (random1 == 1) {
             System.out.println("--- Le Boss attaque !!! ---");
-            Boss.attaquer1_Boss();
-            if (Personnages.getSanté() <= 30) {
-                System.out.println("Tes points de vie commence a diminuer, souhaites-tu utiliser une potion de vie ? ");
-                Scanner sc1 = new Scanner(System.in);
-                String Choix_potion_oui_non = sc1.nextLine();
-                if (Objects.equals(Choix_potion_oui_non, "oui")) {
-                    System.out.println("tu utilises une potion de vie");
-                    Personnages.utiliser_un_objet();
-                } else if (Objects.equals(Choix_potion_oui_non, "non")) {
-                    System.out.println("tu n'utilises pas de potion de vie");
-                }
 
+            int random = (int) (Math.random() * 10); // Génère un nombre entier entre 0 et 10
+            if (random <= 5) { // La chance de réussir l'attaque est de 50%
+                Boss.attaquer1_Boss();
+            } else {
+                System.out.println("L'attaque du Boss a échoué !");
             }
         }
-        if (!Boss.est_En_Vie()) {
-            System.out.println("~ Le Boss est mort, Le joueur gagne ~");
-            Personnages.gagner_Xp();
-            Personnages.Systeme_de_nv();
+
+        if (random1 == 2) {
+            // Le boss peut attaquer soit avec son attaque de base sois une attaque spéciale
+            System.out.println("--- Le Boss attaque avec son attaque spéciale !!! ---");
+            int random2 = (int) (Math.random() * 10); // Génère un nombre entier entre 0 et 10
+            if (random2 <= 3) { // La chance de réussir l'attaque est de 30%
+                Boss.attaquer_Spéciale_Boss();
+            } else {
+                System.out.println("L'attaque spéciale du Boss a échoué !");
+            }
         }
+
+        if (Personnages.getSanté() <= 30) {
+            System.out.println("Tes points de vie commence a diminuer, souhaites-tu utiliser une potion de vie ? ");
+            Scanner sc1 = new Scanner(System.in);
+            String Choix_potion_oui_non = sc1.nextLine();
+            if (Objects.equals(Choix_potion_oui_non, "oui")) {
+                System.out.println("tu utilises une potion de vie");
+                Personnages.utiliser_un_objet();
+            } else if (Objects.equals(Choix_potion_oui_non, "non")) {
+                System.out.println("tu n'utilises pas de potion de vie");
+            }
+
+        }
+
+
+        System.out.println("~ Le Boss est mort, Le joueur gagne ~");
+        Personnages.gagner_Xp();
+        Personnages.Systeme_de_nv();
         if (!Personnages.est_En_Vie()) {
             System.out.println("~ Le Joueur est mort, Le joueur perd ~");
 
         }
     }
+
+    public void endGame() {
+        System.exit(0);
+    }
+
 }
+
+

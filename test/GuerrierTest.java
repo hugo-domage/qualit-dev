@@ -14,19 +14,19 @@ public class GuerrierTest {
     public void getMULTIPL() {
         HashMap<String, Integer> inventaire = new HashMap<>();
         inventaire.put("potion de vie", 1);
-        Personnages personnages = new Guerrier("zozo","Homme",55,150,15,35,25,1000,1,1,"aezaea", );
+        Personnages personnages = new Guerrier("zozo","Homme",55,150,15,35,25,1000,1,"aezaea" );
 
-        Assertions.assertEquals(26,personnages.getDegat());
+        Assertions.assertEquals(325,personnages.getDegat());
 
     }
     @Test
     public void  nom_Guerrier(){
-        Personnages personnages = new Guerrier("zozo","Homme",55,150,15,35,25,1000,1,1,"aezaea", );
+        Personnages personnages = new Guerrier("zozo","Homme",55,150,15,35,25,1000,1,"aezaea" );
         Assertions.assertEquals("zozo",personnages.getNom());
     }
     @Test
     public void attaque_Spéciale(){
-        Personnages personnages = new Guerrier("zozo","Homme",55,150,15,35,25,1000,1,1,"aezaea", );
+        Personnages personnages = new Guerrier("zozo","Homme",55,150,15,35,25,1000,1,"aezaea" );
 
     }
 

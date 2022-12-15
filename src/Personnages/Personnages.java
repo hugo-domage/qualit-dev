@@ -26,8 +26,8 @@ public abstract class Personnages {
     static int degat = (int) (getForce() +  getMULTIPL());
     int po;
     int niveau;
-    static int nv =1;
-    static int Xp = 0;
+    public static int nv =1;
+    public static int Xp = 0;
 
     private static final double MULTIPL=300;
 
@@ -65,7 +65,7 @@ public abstract class Personnages {
     static String sort ; //  nom du sort
 
 
-    public Personnages(String nom, String sexe, int poids, int taille, int age, int force, int nv, int po, int degat, int i, String sort, HashMap<Integer, String> inventaire ) {
+    public Personnages(String nom, String sexe, int poids, int taille, int age, int force, int nv, int po, int degat, String sort ) {
         this.nom = nom;
         this.sexe = sexe;
         this.poids = poids;
@@ -134,7 +134,7 @@ public abstract class Personnages {
 
 
 
-    public int getFaim() {
+    public static int getFaim() {
         return faim;
     }
 
@@ -236,35 +236,24 @@ public abstract class Personnages {
             Personnages.Xp += Boss.Xp;
             System.out.println("tu gagnes "+ Xp + "Xp");
         }
+        Systeme_de_nv();
     }
-    public static void Systeme_de_nv(){
-        if (nv==1) {
-            while (Xp <= 1000) {
-                nv = 1;
-            }
-            nv = 2;
-            Xp = 0; //retour a 0 d'xp car le peronnage passe un nv
+
+    public static void Systeme_de_nv() {
+        if (Personnages.Xp <= 1000 && Personnages.nv == 1) {
+            Personnages.nv = 2;
+            Personnages.Xp = 0; //retour a 0 d'xp car le peronnage passe un nv
             System.out.println("tu viens de passer un nv, tu es maintenant au niveau 2");
-        }
-        if (nv==2) {
-            while (Xp <= 2000) {
-                nv = 2;
-            }
-            nv = 3;
-            Xp = 0;
+        } else if (Personnages.Xp <= 2000 && Personnages.nv == 2) {
+            Personnages.nv = 3;
+            Personnages.Xp = 0;
             System.out.println("tu viens de passer un nv, tu es maintenant au niveau 3");
-
-        }
-        if (nv==3) {
-            while (Xp <= 3000) {
-                nv = 3;
-            }
-            nv = 4;
-            Xp = 0;
+        } else if (Personnages.Xp <= 3000 && Personnages.nv == 3) {
+            Personnages.nv = 4;
+            Personnages.Xp = 0;
             System.out.println("tu viens de passer un nv, tu es maintenant au niveau 4");
-
         }
-        }
+    }
 
     public static boolean est_En_Vie() {
         return santé > 0;
@@ -274,8 +263,12 @@ public abstract class Personnages {
         System.out.println("joueur attaque avec son attaque de base, il fait " + degat +" degat ");
         perdre_vie_Boss();
     }
+        public static boolean esquive() {
+            int chance = (int) (Math.random() * 3);
+            return chance == 0;
+        }
+    }
 
 
 
-}
 

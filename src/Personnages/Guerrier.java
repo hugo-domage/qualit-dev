@@ -1,12 +1,6 @@
 package Personnages;
 
-import Armure.Armure_en_maille;
-import Donjons.*;
-
-import java.util.HashMap;
-
 import static Donjons.Boss.*;
-import Personnages.Personnages.*;
 
 
 public class Guerrier extends Personnages {
@@ -23,12 +17,10 @@ public class Guerrier extends Personnages {
                 faim,
                 santé,
                 po,
-                degat,
-                sort,
-                inventaire
+                sort
         );
 
-        this.inventaire = inventaire;
+
 
 
     }

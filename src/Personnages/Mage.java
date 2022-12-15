@@ -1,23 +1,17 @@
 package Personnages;
 
-import java.util.HashMap;
-
 import static Donjons.Boss.perdre_vie_Boss;
 
 public class Mage extends Personnages{
-    public Mage(String nom, String sexe, int poids, int taille, int age, int force, int nv, int po, int degat, int i, String sort, HashMap<Integer, String> inventaire) {
-        super(nom, sexe, poids, taille, age, force, nv, po, degat, i, sort, inventaire);
+    public Mage(String nom, String sexe, int poids, int taille, int age, int force, int nv, int po, int degat, int i, String sort) {
+        super(nom, sexe, poids, taille, age, force, nv, po, degat, sort);
     }
     private static final double MULTIPL = 1.25;
 
-    static int rage =20;
+    static int Mana =2000;
 
     public static double getMULTIPL() {
         return MULTIPL;
-    }
-
-    public static int getdegats() {
-        return degats;
     }
 
     public static boolean est_En_Vie() {
@@ -29,8 +23,10 @@ public class Mage extends Personnages{
         perdre_vie_Boss();
     }
     public static void attaque_Spéciale_Mage() {
-        degat += rage ;
+        degat += Mana/100 ;
         perdre_vie_Boss();
     }
+
+
 }
 

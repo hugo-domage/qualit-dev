@@ -3,6 +3,7 @@ package Main;
 import Personnages.Guerrier;
 import Armure.Armure;
 import Game.*;
+import thread.TimeoutThread;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,8 +46,9 @@ public class Main {
         listeArmure.add(armure2);
 
         Armure.trierArmure(listeArmure);*/
-        // Jeu.Creation_personange();
-        //  Jeu.Choix_Du_Donjons();
+
+       Jeu.Creation_personange();
+        Jeu.Choix_Du_Donjons();
         Jeu.Combat();
     }
 }
