@@ -1,14 +1,20 @@
 package Personnages;
 
+import Armure.Armure_en_maille;
+import Donjons.*;
+
+import java.util.HashMap;
+
 import static Donjons.Boss.*;
+import Personnages.Personnages.*;
 
 
-public class Guerrier extends Personnages {
+public class Guerrier extends Personnages implements Armure_en_maille {
     private static final double MULTIPL = 1.25;
 
     static int rage =20;
 
-    public Guerrier(String nom, String sexe, int poids, int taille, int age, int force, int degat, int po, int niveau, String sort) {
+    public Guerrier(String nom, String sexe, int poids, int taille, int age, int force, int degat, int po, int niveau, int honneur, String sort) {
         super(nom, sexe,
                 poids,
                 taille,
@@ -17,10 +23,12 @@ public class Guerrier extends Personnages {
                 faim,
                 santé,
                 po,
-                sort
+                degat,
+                sort,
+                inventaire
         );
 
-
+        this.inventaire = inventaire;
 
 
     }
@@ -36,6 +44,10 @@ public class Guerrier extends Personnages {
         return degats;
     }
 
+    @Override
+    public void Armure_en_maille() {
+
+    }
 
     /*
         public void attaquer() {
