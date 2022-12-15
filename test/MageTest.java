@@ -9,6 +9,17 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class MageTest {
+    @Test
+    public void testGetMULTIPL() {
+        assertEquals(1.25, Mage.getMULTIPL(), 0);
+    }
 
+    @Test
+    public void testAttaque_Spéciale_Mage() {
+        Mage.Mana = 100;
+        Mage.setDegat(10);
+        Mage.attaque_Spéciale_Mage();
+        assertEquals(11, Mage.getDegat(), 0);
+    }
 
 }

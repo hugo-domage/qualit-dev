@@ -8,17 +8,14 @@ import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
+import static org.junit.Assert.*;
+import org.junit.Before;
 public class ArcherTest {
     @Test
     public void testGetMultipl() {
         assertEquals(1.25, Archer.getMULTIPL(), 0.0);
     }
-    import static org.junit.Assert.*;
-    import org.junit.Before;
-    import org.junit.Test;
 
-    public class ArcherTest {
         private Archer archer;
 
         @Before
@@ -26,11 +23,6 @@ public class ArcherTest {
             archer = new Archer("Archer", "M", 70, 180, 30, 5, "Arc");
         }
 
-        @Test
-        public void testAttaque_Spéciale_Archer() {
-            archer.attaque_Spéciale_Archer();
-            assertTrue(archer.double_Attaque_Chance());
-        }
 
         @Test
         public void testDouble_Attaque_Chance() {
@@ -48,8 +40,8 @@ public class ArcherTest {
             } else if (archer.dexterite > 40 && archer.dexterite <= 50) {
                 pourcentage_Chance = 100;
             }
-            assertEquals(60, pourcentage_Chance);
+            assertEquals(80, pourcentage_Chance);
         }
     }
-}
+
 

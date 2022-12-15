@@ -7,12 +7,22 @@ import personnages.*;
 
 import java.util.*;
 
-
+/**
+ * Classe Jeu qui permet de créer un personnage.
+ * Elle permet de choisir une classe (Guerrier, Archer ou Mage), un nom, un sexe, un poids et une taille ainsi qu'une armure.
+ * Elle permet de combattre des boss et d'explorer des donjons
+ */
 public class Jeu {
 
 
-    private static int classe;
+    public static int classe;
 
+    /**
+     * Cette méthode permet de créer un personnage à l'aide d'une liste d'armures.
+     * L'utilisateur doit choisir la classe, le nom, le sexe, le poids et la taille du personnage, ainsi qu'une armure de la liste fournie.
+     *
+     * @param armureList La liste des armures disponibles pour le personnage.
+     */
     public static void Creation_personange(List<Armure> armureList) { //Création du personnage
         System.out.println("Veuillez créer votre personnage");
         System.out.println("Quel est la classe que vous choisissez?");
@@ -70,6 +80,9 @@ public class Jeu {
 
     }
 
+    /**
+     * Cette fonction permet à l'utilisateur de choisir un donjon à visiter. Il peut choisir entre la tanière du dragon, le marécage et la grotte. En fonction du donjon choisi, un boss différent sera affiché à l'utilisateur.
+     */
     public static void Choix_Du_Donjons() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Quel donjon veux-tu visiter?");
@@ -101,7 +114,15 @@ public class Jeu {
         System.out.println(nomBoss);
     }
 
-
+    /**
+     * Cette fonction permet de simuler un combat entre un personnage et un boss.
+     * Elle commence par la résurrection du boss, et se poursuit tant que le personnage et le boss sont encore en vie.
+     * A chaque tour de combat, le personnage peut choisir un sort selon sa classe et l'utiliser sur le Boss.
+     * Le Boss peut à chaque tour utiliser une attaque normale ou une attaque spéciale, aléatoirement.
+     * En cas de santé très faible, le personnage peut prendre une potion afin de se soigner.
+     * Si le Boss est vaincu, le personnage gagne de l'expérience et peut monter de niveau.
+     * Si le personnage est vaincu, le joueur perd. C'est le seul moyen d'arrêter la partie.
+     */
     // combat
     public static void Combat() {
         Boss.resurection();
@@ -149,6 +170,10 @@ public class Jeu {
         }
     }
 
+    /**
+     * Cette fonction modélise l'attaque spéciale du Boss. Il y a une chance de 30 % qu'elle réussisse.
+     * Si elle réussit, la fonction attaquer_Spéciale_Boss() du Boss est appellée.
+     */
     private static void attaqueSpecialeBoss() {
         // Le boss peut attaquer soit avec son attaque de base soit avec une attaque spéciale
         System.out.println("--- Le Boss attaque avec son attaque spéciale !!! ---");
@@ -160,6 +185,11 @@ public class Jeu {
         }
     }
 
+    /**
+     * Cette méthode simule une attaque du Boss dans un jeu.
+     * Elle génère un nombre aléatoire entre 0 et 10, et si ce nombre est inférieur ou égal à 5, elle lance l'attaque du Boss.
+     * Sinon, elle affiche un message indiquant que l'attaque a échoué.
+     */
     private static void attaqueDuBoss() {
         System.out.println("--- Le Boss attaque !!! ---");
 
@@ -172,6 +202,10 @@ public class Jeu {
         }
     }
 
+    /**
+     * Cette méthode permet de choisir une des attaques disponibles pour le Mage.
+     * @param sc un Scanner qui permet de récupérer le choix de l'utilisateur
+     */
     private static void sortMage(Scanner sc) {
         System.out.println("1. attaque de base");
         System.out.println("2. attaque spéciale");
@@ -194,6 +228,15 @@ public class Jeu {
         }
     }
 
+    /**
+     * Méthode utilisée pour déterminer l'attaque à effectuer par l'archer.
+     * @param sc Scanner permettant la saisie du choix de l'attaque.
+     * Les attaques disponibles sont :
+     * 1. attaque de base
+     * 2. attaque spéciale
+     * 3. bouclier
+     * Si un choix non valide est entré, l'attaque de base sera effectuée.
+     */
     private static void sortArcher(Scanner sc) {
         System.out.println("1. attaque de base");
         System.out.println("2. attaque spéciale");
@@ -215,6 +258,12 @@ public class Jeu {
         }
     }
 
+    /**
+     * Cette méthode permet à l'utilisateur de choisir l'attaque qu'il souhaite effectuer.
+     * Il a le choix entre une attaque de base, une attaque spéciale ou le bouclier.
+     *
+     * @param sc Le scanner qui sert à récupérer le choix de l'utilisateur
+     */
     private static void sortGuerrier(Scanner sc) {
         System.out.println("1. attaque de base");
         System.out.println("2. attaque spéciale");
@@ -237,7 +286,13 @@ public class Jeu {
         }
     }
 
-    private static void potion() {
+    /**
+     * Cette méthode permet de gérer l'utilisation des potions de vie.
+     * Elle demande à l'utilisateur s'il souhaite utiliser une potion de vie.
+     * Si l'utilisateur répond "oui", alors la méthode Personnages.utiliser_un_objet() est appelée.
+     * Si l'utilisateur répond "non", alors l'utilisation de la potion est annulée.
+     */
+    public static void potion() {
         System.out.println("Tes points de vie commence à diminuer, souhaites-tu utiliser une potion de vie ? ");
         Scanner sc1 = new Scanner(System.in);
         String Choix_potion_oui_non = sc1.nextLine();
