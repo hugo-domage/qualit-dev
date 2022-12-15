@@ -1,38 +1,55 @@
-import Donjons.*;
-import Personnages.Archer;
-import Personnages.Personnages;
+import donjons.*;
+import personnages.Archer;
+import personnages.Personnages;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
+import java.util.Random;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ArcherTest {
-
-
-
-
-    @Before
-    public void setUp() throws Exception {
-        Personnages personnages = new Archer("zozo","Homme",55,150,15,35,25,1000,1,"aezaea" );
-        enemy  enemy= new Boss("Dragon",100,1000);
-    }
-
     @Test
-    public void attaque1_Archer(){
-        int vieBossAvantAttaque = Boss.getSanté();
-        Archer.attaquer1_Archer();
-        int vieBossApresAttaque = Boss.getSanté();
-        assertEquals(vieBossAvantAttaque - Archer.getDegat(), vieBossApresAttaque);
+    public void testGetMultipl() {
+        assertEquals(1.25, Archer.getMULTIPL(), 0.0);
     }
+    import static org.junit.Assert.*;
+    import org.junit.Before;
+    import org.junit.Test;
 
-    @Test
-    public void attaque_Speciale_Archer(){
-        int vieBossAvantAttaque = Boss.getSanté();
-        Archer.attaque_Spéciale_Archer();
-        int vieBossApresAttaque = Boss.getSanté();
-        assertEquals(vieBossAvantAttaque - Archer.getDegat(), vieBossApresAttaque);
+    public class ArcherTest {
+        private Archer archer;
+
+        @Before
+        public void setUp() throws Exception {
+            archer = new Archer("Archer", "M", 70, 180, 30, 5, "Arc");
+        }
+
+        @Test
+        public void testAttaque_Spéciale_Archer() {
+            archer.attaque_Spéciale_Archer();
+            assertTrue(archer.double_Attaque_Chance());
+        }
+
+        @Test
+        public void testDouble_Attaque_Chance() {
+            int pourcentage_Chance = 0;
+            archer.dexterite = 35;
+
+            if (archer.dexterite > 0 && archer.dexterite <= 10) {
+                pourcentage_Chance = 20;
+            } else if (archer.dexterite > 10 && archer.dexterite <= 20) {
+                pourcentage_Chance = 40;
+            } else if (archer.dexterite > 20 && archer.dexterite <= 30) {
+                pourcentage_Chance = 60;
+            } else if (archer.dexterite > 30 && archer.dexterite <= 40) {
+                pourcentage_Chance = 80;
+            } else if (archer.dexterite > 40 && archer.dexterite <= 50) {
+                pourcentage_Chance = 100;
+            }
+            assertEquals(60, pourcentage_Chance);
+        }
     }
-
-
-
 }
+
