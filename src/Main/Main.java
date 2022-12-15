@@ -3,6 +3,8 @@ package Main;
 import Personnages.Guerrier;
 import Armure.Armure;
 import Game.*;
+import Personnages.Personnages;
+import thread.TimeoutThread;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,16 +37,25 @@ public class Main {
         guerrier.attaquer();
         System.out.println(guerrier.getSort());
         */
+
         ArrayList<Armure> listeArmure = new ArrayList<Armure>();
 
         Armure armure = new Armure("Armure en maille",25,10);
         Armure armure2 = new Armure("Armure en cuir",15,5);
+        Armure armure3 = new Armure("Armure en cuir",15,8);
+        Armure armure4 = new Armure("Armure en cuir",15,7);
 
         listeArmure.add(armure);
         listeArmure.add(armure2);
-        // Jeu.Creation_personange();
-      //  Jeu.Choix_Du_Donjons();
-        //Jeu.Combat();
+        listeArmure.add(armure3);
+        listeArmure.add(armure4);
+
         Armure.trierArmure(listeArmure);
+
+       Jeu.Creation_personange(listeArmure);
+       while (Personnages.est_En_Vie()) {
+           Jeu.Choix_Du_Donjons();
+           Jeu.Combat();
+       }
     }
 }

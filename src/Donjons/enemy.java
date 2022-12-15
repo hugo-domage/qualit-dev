@@ -5,7 +5,7 @@ import static Personnages.Personnages.getMULTIPL;
 
 public abstract class enemy {
     private String nom;
-    private static int santé;
+    private static int santé ;
     private int XP;
 
     static int degat = (int) (getForce() +  getMULTIPL());
@@ -35,7 +35,7 @@ public abstract class enemy {
     }
 
     public static boolean est_En_Vie() {
-        return santé > 0;
+        return Boss.santé > 0;
     }
 
     }
