@@ -6,7 +6,6 @@ import Donjons.Boss;
 import java.util.HashMap;
 
 import static Donjons.Boss.*;
-import static Donjons.Boss.perdre_vie_Boss;
 
 
 public abstract class Personnages {
@@ -23,13 +22,13 @@ public abstract class Personnages {
     static int faim = 100;
     public static int santé = 100;
 
-    static int degat = (int) (getForce() +  getMULTIPL());
+    static int degat = (int) (getForce() + getMULTIPL());
     int po;
     int niveau;
-    public static int nv =1;
+    public static int nv = 1;
     public static int Xp = 0;
 
-    private static final double MULTIPL=300;
+    private static final double MULTIPL = 300;
 
     public static int getDegat() {
         return degat;
@@ -62,10 +61,10 @@ public abstract class Personnages {
 
     static HashMap<Integer, String> inventaire = new HashMap<>(); // numero du sac 1,2,3,4; nom de l'objet
 
-    static String sort ; //  nom du sort
+    static String sort; //  nom du sort
 
 
-    public Personnages(String nom, String sexe, int poids, int taille, int age, int force, int nv, int po, int degat, String sort ) {
+    public Personnages(String nom, String sexe, int poids, int taille, int age, int force, int nv, int po, int degat, String sort) {
         this.nom = nom;
         this.sexe = sexe;
         this.poids = poids;
@@ -80,7 +79,6 @@ public abstract class Personnages {
         this.Xp = Xp;
 
     }
-
 
 
     public String getNom() {
@@ -132,8 +130,6 @@ public abstract class Personnages {
     }
 
 
-
-
     public static int getFaim() {
         return faim;
     }
@@ -159,9 +155,6 @@ public abstract class Personnages {
     }
 
 
-
-
-
     public HashMap<Integer, String> getInventaire() {
         return inventaire;
     }
@@ -169,8 +162,6 @@ public abstract class Personnages {
     public void setInventaire(HashMap<Integer, String> inventaire) {
         Personnages.inventaire = inventaire;
     }
-
-
 
 
     public static String getSort() {
@@ -182,12 +173,10 @@ public abstract class Personnages {
     }
 
 
-
-
-    public static void perdre_vie_Joeur() {
+    public static void perdre_vie_Joueur() {
 
         System.out.println("joueur perd " + degat_Boss + " points de vie");
-        santé=(santé - degat_Boss);
+        santé = (santé - degat_Boss);
         if (santé > 0) {
             System.out.println("Joueur " + santé + " points de vie");
         }
@@ -195,7 +184,6 @@ public abstract class Personnages {
             System.out.println("Joueur " + santé + " points de vie");
         }
     }
-
 
 
     public void manger() {
@@ -209,46 +197,42 @@ public abstract class Personnages {
     }
 
 
+    public static void utiliser_un_objet() {
+        HashMap<Integer, String> inventaire = new HashMap<Integer, String>();
+        inventaire.put(2, " potion de rage");
+        inventaire.put(1, "potion de vie");
+        if (santé == 100) {
+            System.out.println("personnage est deja 100% HP");
 
-        public static void utiliser_un_objet() {
-            HashMap<Integer,String> inventaire = new HashMap<Integer,String>();
-            inventaire.put(2," potion de rage");
-            inventaire.put(1,"potion de vie");
-            if (santé == 100) {
-                System.out.println("personnage est deja 100% HP");
+        } else if (santé < 100 && inventaire.containsKey(1) && inventaire.containsValue("potion de vie")) {
+            santé = santé + 20;
+            System.out.println("personnage utilise une potion de vie");
+            System.out.println("personnage est soigné, elle se retrouve avec : " + santé + " Hp");
+        } else {
+            System.out.println("pas de potion dans l'inventaire ");
 
-            } else if (santé < 100 && inventaire.containsKey(1) && inventaire.containsValue("potion de vie")) {
-                santé = santé + 20;
-                System.out.println("personnage utilise une potion de vie");
-                System.out.println("personnage est soigné, elle se retrouve avec : " + santé +" Hp");
-            } else {
-                System.out.println("pas de potion dans l'inventaire ");
-
-            }
         }
+    }
 
 
-
-
-
-    public static void gagner_Xp(){
+    public static void gagner_Xp() {
         if (!Boss.est_En_Vie()) {
             Personnages.Xp += Boss.Xp;
-            System.out.println("tu gagnes "+ Xp + "Xp");
+            System.out.println("tu gagnes " + Xp + "Xp");
         }
         Systeme_de_nv();
     }
 
     public static void Systeme_de_nv() {
-        if (Personnages.Xp <= 1000 && Personnages.nv == 1) {
+        if (Personnages.Xp >= 1000 && Personnages.nv == 1) {
             Personnages.nv = 2;
             Personnages.Xp = 0; //retour a 0 d'xp car le peronnage passe un nv
             System.out.println("tu viens de passer un nv, tu es maintenant au niveau 2");
-        } else if (Personnages.Xp <= 2000 && Personnages.nv == 2) {
+        } else if (Personnages.Xp >= 2000 && Personnages.nv == 2) {
             Personnages.nv = 3;
             Personnages.Xp = 0;
             System.out.println("tu viens de passer un nv, tu es maintenant au niveau 3");
-        } else if (Personnages.Xp <= 3000 && Personnages.nv == 3) {
+        } else if (Personnages.Xp >= 3000 && Personnages.nv == 3) {
             Personnages.nv = 4;
             Personnages.Xp = 0;
             System.out.println("tu viens de passer un nv, tu es maintenant au niveau 4");
@@ -259,16 +243,23 @@ public abstract class Personnages {
         return santé > 0;
     }
 
-    public static void attaquer1(){ // attque de base joueur
-        System.out.println("joueur attaque avec son attaque de base, il fait " + degat +" degat ");
+    public static void attaquer1() { // attque de base joueur
+        System.out.println("joueur attaque avec son attaque de base, il fait " + degat + " degat ");
         perdre_vie_Boss();
     }
-        public static boolean esquive() {
-            int chance = (int) (Math.random() * 3);
-            return chance == 0;
-        }
+
+    public static boolean esquive() {
+        int chance = (int) (Math.random() * 3);
+        return chance == 0;
     }
 
+    public static void bouclier() {
+        double bouclierGuerrier = santé * 0.25;
+        santé += bouclierGuerrier;
+        System.out.println("Votre bouclier a été activé et vous protège avec " + bouclierGuerrier + " points de vie!");
+        System.out.println("Votre vie est maintenant de" + santé + " point de vie");
+    }
+}
 
 
 

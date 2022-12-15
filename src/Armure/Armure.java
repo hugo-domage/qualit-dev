@@ -1,8 +1,9 @@
 package Armure;
 
+import java.util.Collections;
 import java.util.List;
 
-public class Armure {
+public class Armure implements Comparable<Armure>{
 
     private String nom;
     private int  Protection;
@@ -39,21 +40,28 @@ public class Armure {
     }
 
     public static void trierArmure(List<Armure> listeArmure) {
-        for (Armure armureActuelle : listeArmure) {
-            int protection = armureActuelle.getProtection();
-            int poids = armureActuelle.getPoids_Armure();
-            int position = 0;
+        Collections.sort(listeArmure);
+        System.out.println("Liste triée " + listeArmure);
+    }
 
-            for (Armure armureComparee : listeArmure) {
-                if (protection > armureComparee.getProtection() || (protection == armureComparee.getProtection() && poids < armureComparee.getPoids_Armure())) {
-                    position++;
-                }
+    @Override
+    public int compareTo(Armure o) {
+        if (getProtection() == o.Protection) {
+            if (poids_Armure == o.poids_Armure) {
+                return 0;
             }
-
-            listeArmure.remove(armureActuelle);
-            listeArmure.add(position, armureActuelle);
+            return poids_Armure > o.poids_Armure ? 1 : -1;
         }
 
-        System.out.println("Liste triée " + listeArmure);
+        return getProtection() > o.getProtection() ? 1 : -1;
+    }
+
+    @Override
+    public String toString() {
+        return "Armure{" +
+                "nom='" + nom + '\'' +
+                ", Protection=" + Protection +
+                ", poids_Armure=" + poids_Armure +
+                '}';
     }
 }

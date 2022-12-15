@@ -39,13 +39,13 @@ public class Boss extends enemy {
 
     public static void attaquer1_Boss(){ // attaque classique du Boss
         System.out.println("Le Boss attaque avec son attaque de base, il fait " + degat_Boss +" degat ");
-        perdre_vie_Boss();
+        perdre_vie_Joueur();
     }
 
     public static void attaquer_Spéciale_Boss(){ // attaque classique du Boss
         degat_Boss += 10;
         System.out.println("Le Boss attaque avec son attaque de base, il fait " + degat_Boss +" degat ");
-        perdre_vie_Boss();
+        perdre_vie_Joueur();
     }
     public static void perdre_vie_Boss() {
         if (Boss.santé >= 0) {
