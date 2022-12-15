@@ -26,7 +26,6 @@ public abstract class Personnages {
     static int degat = (int) (getForce() +  getMULTIPL());
     int po;
     int niveau;
-    int honneur;
     static int nv =1;
     static int Xp = 0;
 
@@ -75,7 +74,6 @@ public abstract class Personnages {
         this.nv = nv;
         this.po = po;
         this.sort = sort;
-        this.honneur = honneur;
         this.inventaire = inventaire;
         this.santé = santé;
         this.force = force;
@@ -160,13 +158,7 @@ public abstract class Personnages {
         this.po = po;
     }
 
-    public int getNiveau() {
-        return niveau;
-    }
 
-    public void setNiveau(int niveau) {
-        this.niveau = niveau;
-    }
 
 
 

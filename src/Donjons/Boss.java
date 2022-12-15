@@ -17,7 +17,7 @@ public class Boss extends enemy {
     }
 
     public static void perdre_vie_Boss() {
-        if (santé > 0) {
+        if (santé >= 0) {
             System.out.println("Boss perd " + degat + " points de vie");
             santé = (santé - degat);
             System.out.println("Boss " + santé + " points de vie");

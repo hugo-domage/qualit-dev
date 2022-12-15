@@ -35,6 +35,7 @@ public class Main {
         guerrier.attaquer();
         System.out.println(guerrier.getSort());
         */
+        /*
         ArrayList<Armure> listeArmure = new ArrayList<Armure>();
 
         Armure armure = new Armure("Armure en maille",25,10);
@@ -42,9 +43,10 @@ public class Main {
 
         listeArmure.add(armure);
         listeArmure.add(armure2);
+
+        Armure.trierArmure(listeArmure);*/
         // Jeu.Creation_personange();
-      //  Jeu.Choix_Du_Donjons();
-        //Jeu.Combat();
-        Armure.trierArmure(listeArmure);
+        //  Jeu.Choix_Du_Donjons();
+        Jeu.Combat();
     }
 }

@@ -10,8 +10,7 @@ import java.util.Scanner;
 
 
 
-public class Jeu{
-
+public class Jeu {
 
 
     public Jeu(String nom, String sexe, int poids, int taille, int age, int force, int degats, int playerNumber, int po, int niveau) {
@@ -48,60 +47,82 @@ public class Jeu{
             int force = 25;
         }
     }
-    public static void Choix_Du_Donjons(){
+
+    public static void Choix_Du_Donjons() {
         System.out.println("--- Vous entrez dans la selection du Donjons ---");
         Scanner sc = new Scanner(System.in);
         String Donjons = sc.nextLine();
-        if(Objects.equals(Donjons, "Dragon")) {
+        if (Objects.equals(Donjons, "Dragon")) {
             System.out.println("le donjons choisit : " + Donjons);
         }
     }
 
 
-        public static void Combat(){
-            System.out.println("--- Tu rentres dans le donjons la taniére des Dragon ---");
-            System.out.println("Tu es face a face avec le Boss");
-            System.out.println("Dragon");
-            Scanner sc = new Scanner(System.in);
-            while (Boss.est_En_Vie() || Personnages.est_En_Vie()) {
+    // combat
+    public static void Combat() {
+        System.out.println("--- Tu rentres dans le donjons la taniére des Dragon ---");
+        System.out.println("Tu es face a face avec le Boss");
+        System.out.println("Dragon");
+        Scanner sc = new Scanner(System.in);
 
-                System.out.println("Quelle est le nom du sort que tu souhaite utiliser ? ");
-                String nom_sort = sc.nextLine();
-                System.out.println("Le nom du sort que tu souhaite utiliser : " + nom_sort);
+        System.out.println("Choisissez votre classe : Guerrier, Archer ou Mage");
+        String classe = sc.nextLine();
+
+        while (Boss.est_En_Vie() || Personnages.est_En_Vie()) {
+
+            System.out.println("Quelle est le nom du sort que tu souhaite utiliser ? ");
+            String nom_sort = sc.nextLine();
+            System.out.println("Le nom du sort que tu souhaite utiliser : " + nom_sort);
+
+            if (classe.equals("Guerrier")) {
                 if (Objects.equals(nom_sort, "attaque de base")) {
                     Personnages.attaquer1();
-                }else if (Objects.equals(nom_sort, "attaque Spéciale")) {
+                } else if (Objects.equals(nom_sort, "attaque Spéciale")) {
                     Guerrier.attaque_Spéciale_Guerrier();
-                }
-                else {
+                } else {
                     System.out.println("tu as raté ton attaque");
                 }
-
-                System.out.println("--- Le Boss attaque !!! ---");
-                Boss.attaquer1_Boss();
-                if (Personnages.getSanté() <= 30 ){
-                    System.out.println("Tes points de vie commence a diminuer, souhaites-tu utiliser une potion de vie ? ");
-                    Scanner sc1 = new Scanner(System.in);
-                    String Choix_potion_oui_non = sc1.nextLine();
-                    if (Objects.equals(Choix_potion_oui_non, "oui")){
-                        System.out.println("tu utilises une potion de vie");
-                        Personnages.utiliser_un_objet();
-                    }
-                    else if (Objects.equals(Choix_potion_oui_non, "non")){
-                        System.out.println("tu n'utilises pas de potion de vie");
-                    }
-
+            } else if (classe.equals("Archer")) {
+                if (Objects.equals(nom_sort, "attaque de base")) {
+                    Archer.attaquer1_Archer();
+                } else if (Objects.equals(nom_sort, "attaque Spéciale")) {
+                    Archer.attaque_Spéciale_Archer();
+                } else {
+                    System.out.println("tu as raté ton attaque");
+                }
+            } else if (classe.equals("Mage")) {
+                if (Objects.equals(nom_sort, "attaque de base")) {
+                    Mage.attaquer1_Mage();
+                } else if (Objects.equals(nom_sort, "attaque Spéciale")) {
+                    Mage.attaque_Spéciale_Mage();
+                } else {
+                    System.out.println("tu as raté ton attaque");
                 }
             }
-            if (!Boss.est_En_Vie()){
-                System.out.println("~ Le Boss est mort, Le joueur gagne ~");
-                Personnages.gagner_Xp();
-                Personnages.Systeme_de_nv();
-            }
-            if (!Personnages.est_En_Vie()){
-                System.out.println("~ Le Joueur est mort, Le joueur perd ~");
+            
+            System.out.println("--- Le Boss attaque !!! ---");
+            Boss.attaquer1_Boss();
+            if (Personnages.getSanté() <= 30) {
+                System.out.println("Tes points de vie commence a diminuer, souhaites-tu utiliser une potion de vie ? ");
+                Scanner sc1 = new Scanner(System.in);
+                String Choix_potion_oui_non = sc1.nextLine();
+                if (Objects.equals(Choix_potion_oui_non, "oui")) {
+                    System.out.println("tu utilises une potion de vie");
+                    Personnages.utiliser_un_objet();
+                } else if (Objects.equals(Choix_potion_oui_non, "non")) {
+                    System.out.println("tu n'utilises pas de potion de vie");
+                }
 
             }
+        }
+        if (!Boss.est_En_Vie()) {
+            System.out.println("~ Le Boss est mort, Le joueur gagne ~");
+            Personnages.gagner_Xp();
+            Personnages.Systeme_de_nv();
+        }
+        if (!Personnages.est_En_Vie()) {
+            System.out.println("~ Le Joueur est mort, Le joueur perd ~");
 
         }
+    }
 }
